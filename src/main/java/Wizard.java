@@ -1,5 +1,5 @@
-public class Wizard extends Base {
+public class Wizard extends Mage {
     public Wizard() {
-        super(17, 12, 0, new int[]{-5,-5}, 30, 9, false, true, "");
+        super(17, 12, new int[]{-5,-5}, 30, 9,"");
     }
 }

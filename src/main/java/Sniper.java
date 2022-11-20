@@ -1,5 +1,5 @@
-public class Sniper extends Base {
+public class Sniper extends Shooter {
     public Sniper() {
-        super(12, 10, 32, new int[]{8,10}, 15, 9, false, false, "");
+        super(12, 10, new int[]{8,10}, 15, 9, "", 32);
     }
 }

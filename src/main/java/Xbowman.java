@@ -1,5 +1,5 @@
-public class Xbowman extends Base {
+public class Xbowman extends Shooter {
     public Xbowman() {
-        super(6, 3, 16, new int[]{2,3}, 10, 4, false, false, "");
+        super(6, 3, new int[]{2,3}, 10, 4, "", 16);
     }
 }
