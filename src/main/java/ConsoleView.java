@@ -1,8 +1,6 @@
 
-//
-//import Base;
-//import Vector2;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class ConsoleView {
@@ -24,29 +22,73 @@ public class ConsoleView {
         System.out.println(ConsoleView.top10);
 
         for (int i = 1; i <= Main.GANG_SIZE - 1; i++) {
+            String infoHeroWhiteTeam = "null";
+            String infoHeroBlackTeam = "null";
             for (int j = 1; j <= Main.GANG_SIZE; j++) {
-                System.out.print(getChar(new OOP.Vector2(i, j)));
+                System.out.print(getChar(new Vector2(i, j)));
+                if (Main.whiteteam.get(i-1).getPosition().isEqual(new Vector2(i, j)))
+                    infoHeroWhiteTeam = printwithspaces(AnsiColors.ANSI_BLUE + Main.whiteteam.get(i).toString()+ AnsiColors.ANSI_RESET);
+                if (Main.blackteam.get(i-1).getPosition().isEqual(new Vector2(i, j)))
+                    infoHeroBlackTeam = printwithspaces(AnsiColors.ANSI_GREEN + Main.blackteam.get(i).toString()+ AnsiColors.ANSI_RESET);
             }
-            System.out.println("|");
-            System.out.println(ConsoleView.mid10);
+
+            System.out.print("|");
+            System.out.print(infoHeroWhiteTeam + "  "+  infoHeroBlackTeam);
+            System.out.println();
+
+
+            System.out.print(ConsoleView.mid10);
+
+            System.out.println();
         }
 
         for (int j = 1; j <= Main.GANG_SIZE; j++) {
-            System.out.print(getChar(new OOP.Vector2(10, j)));
+            String infoHeroWhiteTeam = "null";
+            String infoHeroBlackTeam = "null";
+            System.out.print(getChar(new Vector2(10, j)));
+            if (Main.whiteteam.get(9).getPosition().isEqual(new Vector2(10, j)))
+                infoHeroWhiteTeam = AnsiColors.ANSI_BLUE + Main.whiteteam.get(9).toString()+ AnsiColors.ANSI_RESET;
+            if (Main.blackteam.get(9).getPosition().isEqual(new Vector2(10, j)))
+                infoHeroBlackTeam = AnsiColors.ANSI_GREEN + Main.blackteam.get(9).toString()+ AnsiColors.ANSI_RESET;
+
         }
-        System.out.println("|");
+        System.out.print("|");
+        System.out.print(" put hero here");
+        System.out.println();
         System.out.println(ConsoleView.bottom10);
     }
 
-    private static String getChar(OOP.Vector2 position) {
+    private static String getChar(Vector2 position) {
         String str = "| ";
         for (int i = 0; i < Main.GANG_SIZE; i++) {
-            if (Main.darkSide.get(i).getPosition().isEqual(position))
-                str = "|" + AnsiColors.ANSI_GREEN + Main.darkSide.get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
-            if (Main.whiteSide.get(i).getPosition().isEqual(position))
-                str = "|" + AnsiColors.ANSI_BLUE + Main.whiteSide.get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
+            if (Main.blackteam.get(i).getPosition().isEqual(position))
+                str = "|" + AnsiColors.ANSI_GREEN + Main.blackteam.get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
+            if (Main.whiteteam.get(i).getPosition().isEqual(position))
+                str = "|" + AnsiColors.ANSI_BLUE + Main.whiteteam.get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
         }
         return str;
+    }
+
+
+    public static String addspace (int s){
+        String strspaces = "";
+        for (int i = 1; i < s ; i++)
+            strspaces = strspaces + " ";
+        return strspaces;
+    }
+    public static String printwithspaces(String infohero) {
+
+        if (infohero.length() < 93){
+            int s = 93 - infohero.length();
+            infohero = infohero + addspace(s);
+        }
+        return infohero;}
+
+
+
+        private static String printInfo(Vector2 position, int i)
+    {
+        return "";
     }
 
     private static String formatDiv(String str) {

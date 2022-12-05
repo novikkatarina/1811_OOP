@@ -11,6 +11,7 @@ public abstract class Base implements BaseInterface, Comparable<Base>{
     private static int idCounter;
     private int playerID;
     private double maxHealth;
+    protected Vector2 position;
 
     public Base(int attack, int protection, int[] damage,
             double health, int speed, String name) {
@@ -29,6 +30,9 @@ public abstract class Base implements BaseInterface, Comparable<Base>{
     public void getdamage(){
         this.health = 0; 
     }
+    public String getName(){return name;}
+
+    public Vector2 getPosition(){return position;}
 
     
     @Override
@@ -59,8 +63,8 @@ public abstract class Base implements BaseInterface, Comparable<Base>{
     @Override
     public String toString() {
         return  this.getClass().getSimpleName() + " " + playerID +
-                " attack= " + attack +
-                ", protection= " + protection +
+                " attk= " + attack +
+                ", protect= " + protection +
                 ", damage= " + Arrays.toString(damage) +
                 ", health= " + health +
                 ", speed= " + speed;

@@ -2,9 +2,10 @@ public class Peasant extends Base {
 
     private boolean delivery;
 
-    public Peasant() {
-        super(1, 1, new int[] { 1, 1 }, 1, 3, "");
+    public Peasant(int x, int y) {
+        super(1, 1, new int[] { 1, 1 }, 1, 3, "Peasant");
         this.delivery = true;
+        super.position = new Vector2(x, y);
     }
 
     @Override

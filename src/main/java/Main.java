@@ -2,86 +2,66 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
-    
+    public static int GANG_SIZE = 10;
+    public static ArrayList<Base> whiteteam = new ArrayList<Base>();
+    public static ArrayList<Base> blackteam = new ArrayList<Base>();
     public static void main(String[] args) {
-        ArrayList<Base> list = new ArrayList<>();
-        list.add(new Monk());
-        list.add(new Peasant());
-        list.add(new Peasant());
-        list.add(new Spearman());
-        list.add(new Xbowman());
-        list.add(new Xbowman());
-        list.add(new Spearman());
-        list.add(new Spearman());
-        list.forEach(System.out::println);
+
+        FillWhiteTeam (whiteteam, GANG_SIZE);
+        FillBlackTeam (blackteam, GANG_SIZE);
+        whiteteam.forEach(System.out::println);
+        blackteam.forEach(System.out::println);
+        ConsoleView.view();
         // choose_hero(list, "Wizard");
-        list.get(3).getdamage();
-        System.out.println("Damage");
-        System.out.println(list.get(3));
-        list.get(0).step(list);
-        System.out.println("Healled");
-        list.forEach(System.out::println);
+
+
+//        list.get(3).getdamage();
+//        System.out.println("Damage");
+//        System.out.println(list.get(3));
+//        list.get(0).step(list);
+//        System.out.println("Healled");
+//        list.forEach(System.out::println);
 
     }
 
-    static void whiteteam(ArrayList<Base> list) {
+    static void FillWhiteTeam(ArrayList<Base> list, int GANG_SIZE) {
+        int x=1;
+        int y=1;
         Random random = new Random();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < GANG_SIZE; i++) {
             int random_hero = random.nextInt(4);
             if (random_hero == 0)
-                list.add(new Peasant());
+                list.add(new Peasant(x++, y));
             if (random_hero == 1)
-                list.add(new Robber());
+                list.add(new Robber(x++, y));
             if (random_hero == 2)
-                list.add(new Sniper());
+                list.add(new Sniper(x++, y));
             if (random_hero == 3)
-                list.add(new Wizard());
-            if (random_hero == 4);
-        }
-    }
-    static void blackteam(ArrayList<Base> list) {
+                list.add(new Wizard(x++, y));
+        }}
+    static void FillBlackTeam(ArrayList<Base> list, int GANG_SIZE)
+        {
+            int x=1;
+            int y=10;
         Random random = new Random();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < GANG_SIZE; i++) {
             int random_hero = random.nextInt(4);
             if (random_hero == 0)
-                list.add(new Peasant());
+                list.add(new Peasant(x++, y));
             if (random_hero == 1)
-                list.add(new Monk());
+                list.add(new Monk(x++,y));
             if (random_hero == 2)
-                list.add(new Spearman());
+                list.add(new Spearman(x++, y));
             if (random_hero == 3)
-                list.add(new Xbowman());
-            if (random_hero == 4);
+                list.add(new Xbowman(x++, y));
         }
     }
 
-    // static void get_hero(ArrayList<Base> list) {
-    //     Random random = new Random();
-    //     for (int i = 0; i < 50; i++) {
-    //         int random_hero = random.nextInt(6);
-    //         if (random_hero == 0)
-    //             list.add(new Monk());
-    //         if (random_hero == 1)
-    //             list.add(new Peasant());
-    //         if (random_hero == 2)
-    //             list.add(new Robber());
-    //         if (random_hero == 3)
-    //             list.add(new Sniper());
-    //         if (random_hero == 4)
-    //             list.add(new Spearman());
-    //         if (random_hero == 5)
-    //             list.add(new Wizard());
-    //         if (random_hero == 6)
-    //             list.add(new Xbowman());
-    //     }
-    // }
 
-    static void choose_hero(ArrayList<Base> list, String name) {
-        for (int i = 0; i < 50; i++) {
-            if (list.get(i).getClass().getSimpleName() == name)
-                System.out.println(list.get(i));
+//    static void choose_hero(ArrayList<Base> list, String name) {
+//        for (int i = 0; i < 10; i++) {
+//            if (list.get(i).getClass().getSimpleName() == name)
+//                System.out.println(list.get(i));
 
         }
-    }
 
-}

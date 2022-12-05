@@ -5,11 +5,13 @@ public abstract class Mage extends Base {
             double health, int speed, String name) {
         super(attack, protection, damage, health, speed, name);
         this.magic = true;
+
     }
 
     @Override
     public String toString() {
         return super.toString() + " magic ";
     }
+
 
 }
