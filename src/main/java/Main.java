@@ -12,7 +12,6 @@ public class Main {
         whiteteam.forEach(System.out::println);
         blackteam.forEach(System.out::println);
         ConsoleView.view();
-        // choose_hero(list, "Wizard");
 
 
 //        list.get(3).getdamage();

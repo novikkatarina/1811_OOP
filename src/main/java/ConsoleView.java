@@ -20,10 +20,9 @@ public class ConsoleView {
         }
 
         System.out.println(ConsoleView.top10);
-
+        String infoHeroWhiteTeam = "null";
+        String infoHeroBlackTeam = "null";
         for (int i = 1; i <= Main.GANG_SIZE - 1; i++) {
-            String infoHeroWhiteTeam = "null";
-            String infoHeroBlackTeam = "null";
             for (int j = 1; j <= Main.GANG_SIZE; j++) {
                 System.out.print(getChar(new Vector2(i, j)));
                 if (Main.whiteteam.get(i-1).getPosition().isEqual(new Vector2(i, j)))
@@ -41,20 +40,17 @@ public class ConsoleView {
 
             System.out.println();
         }
-
         for (int j = 1; j <= Main.GANG_SIZE; j++) {
-            String infoHeroWhiteTeam = "null";
-            String infoHeroBlackTeam = "null";
             System.out.print(getChar(new Vector2(10, j)));
             if (Main.whiteteam.get(9).getPosition().isEqual(new Vector2(10, j)))
-                infoHeroWhiteTeam = AnsiColors.ANSI_BLUE + Main.whiteteam.get(9).toString()+ AnsiColors.ANSI_RESET;
+                infoHeroWhiteTeam = printwithspaces(AnsiColors.ANSI_BLUE + Main.whiteteam.get(9).toString()+ AnsiColors.ANSI_RESET);
             if (Main.blackteam.get(9).getPosition().isEqual(new Vector2(10, j)))
-                infoHeroBlackTeam = AnsiColors.ANSI_GREEN + Main.blackteam.get(9).toString()+ AnsiColors.ANSI_RESET;
+                infoHeroBlackTeam = printwithspaces(AnsiColors.ANSI_GREEN + Main.blackteam.get(9).toString()+ AnsiColors.ANSI_RESET);
 
         }
         System.out.print("|");
-        System.out.print(" put hero here");
-        System.out.println();
+        System.out.print("");
+        System.out.println(infoHeroWhiteTeam + "  "+  infoHeroBlackTeam);
         System.out.println(ConsoleView.bottom10);
     }
 
