@@ -72,17 +72,52 @@ public abstract class Base implements BaseInterface, Comparable<Base>{
     public void step(ArrayList<Base> enemy, ArrayList<Base> team) {
     
     }
+    public static ArrayList<Base> sortingByName (ArrayList<Base> unsortedTeam, String name){
+        ArrayList<Base> sortedTeam = new ArrayList<>();
+        for (int i=0; i< unsortedTeam.size();i++ ){
+            if (unsortedTeam.get(i).getName() == name){
+                sortedTeam.add(unsortedTeam.get(i));
+            }
+        }
+        return sortedTeam;
+    }
+
+    public static ArrayList<Base> sortedTeam(ArrayList<Base> team){
+        ArrayList<Base> sortedTeam = new ArrayList<>();
+        for (int i=0; i< team.size();i++ ){
+            if (sortingByName(team, "Xbowman") != null){
+                sortedTeam.addAll(sortingByName(team, "Xbowman"));
+            }
+            if (sortingByName(team, "Sniper") != null){
+                sortedTeam.addAll(sortingByName(team, "Sniper"));
+            }
+            if (sortingByName(team, "Spearman") != null){
+                sortedTeam.addAll(sortingByName(team, "Spearman"));
+            }
+            if (sortingByName(team, "Robber") != null){
+                sortedTeam.addAll(sortingByName(team, "Robber"));
+            }
+            if (sortingByName(team, "Monk") != null){
+                sortedTeam.addAll(sortingByName(team, "Monk"));
+            }
+            if (sortingByName(team, "Wizard") != null){
+                sortedTeam.addAll(sortingByName(team, "Wizard"));
+            }
+            if (sortingByName(team, "Peasant") != null){
+                sortedTeam.addAll(sortingByName(team, "Peasant"));
+            }
+        }
+        return sortedTeam;
+    }
+
+
 
     @Override
     public String getInfo() {
-        // TODO Auto-generated method stub
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
+
     public int compareTo(Base player){
         if (this.health > player.health)
             return 1;

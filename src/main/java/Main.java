@@ -11,6 +11,10 @@ public class Main {
 
         FillWhiteTeam (whiteteam, GANG_SIZE);
         FillBlackTeam (blackteam, GANG_SIZE);
+        ArrayList<Base> sortedWhiteTeam = new ArrayList<>();
+        ArrayList<Base> sortedBlackTeam = new ArrayList<>();
+        sortedWhiteTeam = Base.sortedTeam(whiteteam);
+        sortedBlackTeam = Base.sortedTeam(blackteam);
 //        whiteteam.forEach(System.out::println);
 //        blackteam.forEach(System.out::println);
 //        ConsoleView.view();
@@ -24,10 +28,8 @@ public class Main {
             ConsoleView.view();
             scanner.nextLine();
             for (int i = 0; i < whiteteam.size(); i++){
-                whiteteam.get(i).step (blackteam, whiteteam);
-            }
-            for (int i = 0; i < blackteam.size(); i++){
-                blackteam.get(i).step (whiteteam, blackteam);
+                sortedWhiteTeam.get(i).step (blackteam, whiteteam);
+                sortedBlackTeam.get(i).step (whiteteam, blackteam);
             }
 
         }
