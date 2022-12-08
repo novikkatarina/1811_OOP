@@ -12,6 +12,8 @@ public abstract class Base implements BaseInterface, Comparable<Base>{
     private int playerID;
     private double maxHealth;
     protected Vector2 position;
+    protected String status;
+
 
     public Base(int attack, int protection, int[] damage,
             double health, int speed, String name) {
@@ -23,20 +25,51 @@ public abstract class Base implements BaseInterface, Comparable<Base>{
         this.name = name;
         playerID = idCounter++;
         maxHealth = health;
+        this.status = "alive";
     }
     public void heal (){
-        this.health = maxHealth; 
+        this.health = maxHealth;
     }
-    public void getdamage(){
-        this.health = 0; 
+
+    public int valueDamage (Base enemy) {
+        int damage = 0;
+        if (this.attack == enemy.protection) {
+            damage = (this.damage[0] + this.damage[1]) / 2;
+        }
+        else if (this.attack < enemy.protection) {
+            damage =this.damage[1];
+        }
+        else if (this.attack < enemy.protection){
+            damage =this.damage[0];
+        }
+        if (this.position.distance(enemy.position) > this.speed) {damage = damage/2;}
+        return damage;
+    }
+
+//    public void getdamage(){
+//
+//    }
+    public void damage(int valueDamage){
+        this.health = health - valueDamage;
+        if (this.health<=0){
+            this.status = "dead";
+            this.health = 0;
+        }
+        if (this.health > this.maxHealth) this.health = this.maxHealth;
     }
     public String getName(){return name;}
+    public String getStatus(){return status;}
 
     public Vector2 getPosition(){return position;}
 
-    
-    @Override
-    public void step(ArrayList<Base> group) {
+    public boolean getDelivery(){return false;}
+    protected void setStatus(String status) {this.status = status;}
+    public void setDelivery(boolean value){
+    }
+
+
+
+    public void step(ArrayList<Base> enemy, ArrayList<Base> team) {
     
     }
 

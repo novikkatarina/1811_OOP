@@ -9,8 +9,9 @@ public class Monk extends Mage {
                 super.position = new Vector2(x, y);
     }
     @Override
-    public void step (ArrayList<Base> group) {
-        Collections.sort (group);
-        group.get(0).heal();     
+    public void step (ArrayList<Base> enemy, ArrayList<Base> team) {
+        if (getStatus()=="dead") return;
+        Collections.sort (team);
+        team.get(0).heal();
     }
 }

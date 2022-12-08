@@ -25,15 +25,20 @@ public class ConsoleView {
         for (int i = 1; i <= Main.GANG_SIZE - 1; i++) {
             for (int j = 1; j <= Main.GANG_SIZE; j++) {
                 System.out.print(getChar(new Vector2(i, j)));
-                if (Main.whiteteam.get(i-1).getPosition().isEqual(new Vector2(i, j)))
-                    infoHeroWhiteTeam = printwithspaces(AnsiColors.ANSI_BLUE + Main.whiteteam.get(i).toString()+ AnsiColors.ANSI_RESET);
-                if (Main.blackteam.get(i-1).getPosition().isEqual(new Vector2(i, j)))
-                    infoHeroBlackTeam = printwithspaces(AnsiColors.ANSI_GREEN + Main.blackteam.get(i).toString()+ AnsiColors.ANSI_RESET);
+
+                for (int k = 0; k < Main.GANG_SIZE; k++) {
+                    if (Main.whiteteam.get(k).getPosition().isEqual(new Vector2(i, j)))
+                        infoHeroWhiteTeam = printwithspaces(AnsiColors.ANSI_BLUE + Main.whiteteam.get(k).toString() + AnsiColors.ANSI_RESET);
+                    if (Main.blackteam.get(k).getPosition().isEqual(new Vector2(i, j)))
+                        infoHeroBlackTeam = printwithspaces(AnsiColors.ANSI_GREEN + Main.blackteam.get(k).toString() + AnsiColors.ANSI_RESET);
+                }
             }
 
             System.out.print("|");
             System.out.print(infoHeroWhiteTeam + "  "+  infoHeroBlackTeam);
             System.out.println();
+
+
 
 
             System.out.print(ConsoleView.mid10);

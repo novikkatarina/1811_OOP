@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
+
 
 public class Main {
     public static int GANG_SIZE = 10;
@@ -9,9 +11,26 @@ public class Main {
 
         FillWhiteTeam (whiteteam, GANG_SIZE);
         FillBlackTeam (blackteam, GANG_SIZE);
-        whiteteam.forEach(System.out::println);
-        blackteam.forEach(System.out::println);
-        ConsoleView.view();
+//        whiteteam.forEach(System.out::println);
+//        blackteam.forEach(System.out::println);
+//        ConsoleView.view();
+
+
+
+
+
+        while (true){
+            Scanner scanner =  new Scanner(System.in);
+            ConsoleView.view();
+            scanner.nextLine();
+            for (int i = 0; i < whiteteam.size(); i++){
+                whiteteam.get(i).step (blackteam, whiteteam);
+            }
+            for (int i = 0; i < blackteam.size(); i++){
+                blackteam.get(i).step (whiteteam, blackteam);
+            }
+
+        }
 
 
 //        list.get(3).getdamage();
