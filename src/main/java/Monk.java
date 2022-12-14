@@ -10,8 +10,9 @@ public class Monk extends Mage {
     }
     @Override
     public void step (ArrayList<Base> enemy, ArrayList<Base> team) {
-        if (getStatus()=="dead") return;
-        Collections.sort (team);
-        team.get(0).heal();
+        if (this.status == "DEAD") return;
+        ArrayList<Base> copy = new ArrayList<>(team);
+        Collections.sort(copy);
+        copy.get(0).heal();
     }
 }

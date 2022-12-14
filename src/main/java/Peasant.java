@@ -9,10 +9,10 @@ public class Peasant extends Base {
         this.delivery = true;
         super.position = new Vector2(x, y);
     }
-    @Override
-    public String toString() {
-        return super.toString() + " delivery ";
-    }
+//    @Override
+//    public String toString() {
+//        return super.toString() + " delivery ";
+//    }
 
     @Override
     public boolean getDelivery(){return delivery;}
@@ -24,8 +24,9 @@ public class Peasant extends Base {
 
     @Override
     public void step(ArrayList<Base> enemy, ArrayList<Base> team) {
-        if (this.status == "used"){
-            this.status= "alive";
+        if (this.status == "DEAD") return;
+        if (this.delivery == false){
+            this.delivery = true;
         }
 
     }

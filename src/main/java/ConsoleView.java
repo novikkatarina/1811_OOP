@@ -27,10 +27,16 @@ public class ConsoleView {
                 System.out.print(getChar(new Vector2(i, j)));
 
                 for (int k = 0; k < Main.GANG_SIZE; k++) {
-                    if (Main.whiteteam.get(k).getPosition().isEqual(new Vector2(i, j)))
+                    if (Main.whiteteam.get(k).getPosition().isEqual(new Vector2(i, j))&&(!Main.whiteteam.get(k).getStatus().equals("DEAD")))
                         infoHeroWhiteTeam = printwithspaces(AnsiColors.ANSI_BLUE + Main.whiteteam.get(k).toString() + AnsiColors.ANSI_RESET);
-                    if (Main.blackteam.get(k).getPosition().isEqual(new Vector2(i, j)))
+                    if (Main.whiteteam.get(k).getPosition().isEqual(new Vector2(i, j))&&(Main.whiteteam.get(k).getStatus().equals("DEAD")))
+                        infoHeroWhiteTeam = printwithspaces(AnsiColors.ANSI_RED + Main.whiteteam.get(k).toString() + AnsiColors.ANSI_RESET);
+
+                    if (Main.blackteam.get(k).getPosition().isEqual(new Vector2(i, j))&&(!Main.blackteam.get(k).getStatus().equals("DEAD")))
                         infoHeroBlackTeam = printwithspaces(AnsiColors.ANSI_GREEN + Main.blackteam.get(k).toString() + AnsiColors.ANSI_RESET);
+                    if (Main.blackteam.get(k).getPosition().isEqual(new Vector2(i, j))&&(Main.blackteam.get(k).getStatus().equals("DEAD")))
+                        infoHeroBlackTeam = printwithspaces(AnsiColors.ANSI_RED + Main.blackteam.get(k).toString() + AnsiColors.ANSI_RESET);
+
                 }
             }
 
@@ -47,10 +53,16 @@ public class ConsoleView {
         }
         for (int j = 1; j <= Main.GANG_SIZE; j++) {
             System.out.print(getChar(new Vector2(10, j)));
-            if (Main.whiteteam.get(9).getPosition().isEqual(new Vector2(10, j)))
-                infoHeroWhiteTeam = printwithspaces(AnsiColors.ANSI_BLUE + Main.whiteteam.get(9).toString()+ AnsiColors.ANSI_RESET);
-            if (Main.blackteam.get(9).getPosition().isEqual(new Vector2(10, j)))
-                infoHeroBlackTeam = printwithspaces(AnsiColors.ANSI_GREEN + Main.blackteam.get(9).toString()+ AnsiColors.ANSI_RESET);
+            for (int k = 0; k < Main.GANG_SIZE; k++) {
+            if (Main.whiteteam.get(k).getPosition().isEqual(new Vector2(10, j))&&(!Main.whiteteam.get(k).getStatus().equals("DEAD")))
+                infoHeroWhiteTeam = printwithspaces(AnsiColors.ANSI_BLUE + Main.whiteteam.get(k).toString()+ AnsiColors.ANSI_RESET);
+            else if (Main.whiteteam.get(k).getPosition().isEqual(new Vector2(10, j))&&(Main.whiteteam.get(k).getStatus().equals("DEAD")))
+                infoHeroWhiteTeam = printwithspaces(AnsiColors.ANSI_RED + Main.whiteteam.get(k).toString()+ AnsiColors.ANSI_RESET);
+            if (Main.blackteam.get(k).getPosition().isEqual(new Vector2(10, j))&&(!Main.blackteam.get(k).getStatus().equals("DEAD")))
+                infoHeroBlackTeam = printwithspaces(AnsiColors.ANSI_GREEN + Main.blackteam.get(k).toString()+ AnsiColors.ANSI_RESET);
+            else if (Main.blackteam.get(k).getPosition().isEqual(new Vector2(10, j))&&(Main.blackteam.get(k).getStatus().equals("DEAD")))
+                infoHeroBlackTeam = printwithspaces(AnsiColors.ANSI_RED + Main.blackteam.get(k).toString()+ AnsiColors.ANSI_RESET);}
+
 
         }
         System.out.print("|");
@@ -62,13 +74,19 @@ public class ConsoleView {
     private static String getChar(Vector2 position) {
         String str = "| ";
         for (int i = 0; i < Main.GANG_SIZE; i++) {
-            if (Main.blackteam.get(i).getPosition().isEqual(position))
+            if (Main.blackteam.get(i).getPosition().isEqual(position)&&(!Main.blackteam.get(i).getStatus().equals("DEAD")))
                 str = "|" + AnsiColors.ANSI_GREEN + Main.blackteam.get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
-            if (Main.whiteteam.get(i).getPosition().isEqual(position))
+            else if (Main.blackteam.get(i).getPosition().isEqual(position)&&(Main.blackteam.get(i).getStatus().equals("DEAD")))
+                str = "|" + AnsiColors.ANSI_RED + Main.blackteam.get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
+            if (Main.whiteteam.get(i).getPosition().isEqual(position)&&(!Main.whiteteam.get(i).getStatus().equals("DEAD")))
                 str = "|" + AnsiColors.ANSI_BLUE + Main.whiteteam.get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
+            else if (Main.whiteteam.get(i).getPosition().isEqual(position)&&(Main.whiteteam.get(i).getStatus().equals("DEAD")))
+                str = "|" + AnsiColors.ANSI_RED + Main.whiteteam.get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
+
         }
         return str;
     }
+
 
 
     public static String addspace (int s){

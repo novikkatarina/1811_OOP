@@ -12,7 +12,7 @@ public class Vector2 {
     }
 
     public double distance (Vector2 enemy){
-        double distance = Math.sqrt(Math.pow((this.x - enemy.x),2) + Math.pow((this.y + enemy.y),2));
+        double distance = Math.sqrt(Math.pow((this.x - enemy.x),2) + Math.pow((this.y - enemy.y),2));
         return distance;
     }
 }
