@@ -20,10 +20,12 @@ public class ConsoleView {
         }
 
         System.out.println(ConsoleView.top10);
-        String infoHeroWhiteTeam = "null";
-        String infoHeroBlackTeam = "null";
-        for (int i = 1; i <= Main.GANG_SIZE - 1; i++) {
-            for (int j = 1; j <= Main.GANG_SIZE; j++) {
+        String infoHeroWhiteTeam = " ";
+        String infoHeroBlackTeam = " ";
+        for (int i = 1; i <= 9; i++) {
+            infoHeroWhiteTeam = " ";
+            infoHeroBlackTeam = " ";
+            for (int j = 1; j <= 10; j++) {
                 System.out.print(getChar(new Vector2(i, j)));
 
                 for (int k = 0; k < Main.GANG_SIZE; k++) {
@@ -51,7 +53,7 @@ public class ConsoleView {
 
             System.out.println();
         }
-        for (int j = 1; j <= Main.GANG_SIZE; j++) {
+        for (int j = 1; j <= 10; j++) {
             System.out.print(getChar(new Vector2(10, j)));
             for (int k = 0; k < Main.GANG_SIZE; k++) {
             if (Main.whiteteam.get(k).getPosition().isEqual(new Vector2(10, j))&&(!Main.whiteteam.get(k).getStatus().equals("DEAD")))

@@ -12,9 +12,15 @@ public abstract class Base implements BaseInterface, Comparable<Base> {
     private final double maxHealth;
     protected Vector2 position;
     protected String status;
+    protected int amount;
+    protected double stackHP;
+    protected final double MAXstackHP;
+    protected final int initialAmount;
+    private boolean saved;
 
 
-    public Base(int attack, int protection, int[] damage, double health, int speed, String name) {
+    public Base(int attack, int protection, int[] damage, double health, int speed, String name, int amount) {
+        this.saved = false;
         this.attack = attack;
         this.protection = protection;
         this.damage = damage;
@@ -24,20 +30,22 @@ public abstract class Base implements BaseInterface, Comparable<Base> {
         playerID = idCounter++;
         maxHealth = health;
         this.status = "ALIVE";
+        this.amount = amount;
+
+        this.stackHP = (amount -1)*maxHealth + health;
+        this.MAXstackHP = amount * maxHealth;
+        this.initialAmount = amount;
     }
 
-    public void heal() {
-        this.health = maxHealth;
-    }
 
     public int valueDamage(Base enemy) {
         int damage;
         if (this.attack == enemy.protection) {
-            damage = (this.damage[0] + this.damage[1]) / 2;
+            damage = (this.damage[0] * this.amount + this.damage[1]) / 2;
         } else if (this.attack < enemy.protection) {
-            damage = this.damage[1];
+            damage = this.damage[1] * this.amount;
         } else {
-            damage = this.damage[0];
+            damage = this.damage[0] * this.amount;
         }
         if (this.position.distance(enemy.position) > this.speed) {
             damage = damage / 2;
@@ -46,12 +54,21 @@ public abstract class Base implements BaseInterface, Comparable<Base> {
     }
 
     public void damage(int valueDamage) {
-        this.health = health - valueDamage;
-        if (this.health <= 0) {
+
+        double stackHP = (this.amount -1)*this.maxHealth + this.health;
+        stackHP -= valueDamage; // 34
+        if (stackHP <= 0) {
             this.status = "DEAD";
             this.health = 0;
+            this.amount = 0;
+            return;
         }
-        if (this.health > this.maxHealth) this.health = this.maxHealth;
+        this.amount = (int) (stackHP/ this.maxHealth);
+        if (stackHP % this.maxHealth!=0){
+            this.health = stackHP - this.maxHealth * this.amount;
+            this.amount++;
+        }
+        if (this.health> this.maxHealth) {this.health = this.maxHealth;}
     }
 
     public String getName() {
@@ -70,8 +87,32 @@ public abstract class Base implements BaseInterface, Comparable<Base> {
         return false;
     }
 
+    public boolean getSaved(){
+        return saved;
+    }
+
+//    public double getStackHP(){
+//        return stackHP;
+//    }
+//
+//    public double getMaxHealth() {
+//        return maxHealth;
+//    }
+
+    public void heal (){
+        this.health += 5;
+    }
+
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setSaved(boolean saved) {
+        this.saved = saved;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
     }
 
     public void setDelivery(boolean value) {
@@ -98,7 +139,6 @@ public abstract class Base implements BaseInterface, Comparable<Base> {
 
     public static ArrayList<Base> sortedWhiteTeam(ArrayList<Base> team) {
         ArrayList<Base> sortedTeam = new ArrayList<>();
-        for (int i = 0; i < team.size(); i++) {
             if (!sortingByName(team, "Sniper").isEmpty()) {
                 sortedTeam.addAll(sortingByName(team, "Sniper"));
             }
@@ -112,34 +152,24 @@ public abstract class Base implements BaseInterface, Comparable<Base> {
                 sortedTeam.addAll(sortingByName(team, "Peasant"));
             }
             return sortedTeam;
-        }
-        return sortedTeam;
+
     }
 
     public static ArrayList<Base> sortedBlackTeam(ArrayList<Base> team) {
         ArrayList<Base> sortedTeam = new ArrayList<>();
-        int n = 0;
-        for (int i = 0; i < team.size(); i++) {
             if (!sortingByName(team, "Xbowman").isEmpty()) {
                 sortedTeam.addAll(sortingByName(team, "Xbowman"));
-                n++;
             }
             if (!sortingByName(team, "Spearman").isEmpty()) {
                 sortedTeam.addAll(sortingByName(team, "Spearman"));
-                n++;
             }
 
             if (!sortingByName(team, "Monk").isEmpty()) {
                 sortedTeam.addAll(sortingByName(team, "Monk"));
-                n++;
             }
             if (!sortingByName(team, "Peasant").isEmpty()) {
                 sortedTeam.addAll(sortingByName(team, "Peasant"));
-                n++;
-            }
             return sortedTeam;
-//            if (n==10) return sortedTeam;
-
         }
         return sortedTeam;
     }
@@ -152,9 +182,13 @@ public abstract class Base implements BaseInterface, Comparable<Base> {
     }
 
 
+
+
+
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + " " + playerID +
+                "  Amount  " + amount +
 //                " attk= " + attack +
 //                ", protect= " + protection +
 //                ", damage= " + Arrays.toString(damage) +

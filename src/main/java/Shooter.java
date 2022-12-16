@@ -5,8 +5,8 @@ public abstract class Shooter extends Base {
     private int maxShots;
 
     protected Shooter(int attack, int protection, int[] damage,
-                      double health, int speed, String name, int shots, int maxShots) {
-        super(attack, protection, damage, health, speed, name);
+                      double health, int speed, String name, int shots, int maxShots, int amount) {
+        super(attack, protection, damage, health, speed, name, amount);
         this.shots = shots;
         this.maxShots = shots;
     }
